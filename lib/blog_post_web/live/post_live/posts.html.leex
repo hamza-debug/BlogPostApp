@@ -1,0 +1,30 @@
+  <h1> User Posts </h1>
+
+  <%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, BlogPostWeb.PostLive.FormComponent,
+  id: @post.id || :new,
+  title: @page_title,
+  action: @live_action,
+  post: @post,
+  user_id: @id,
+  return_to: Routes.post_posts_path(@socket, :index, @id) %>
+  <% end %>
+
+  <span><%= live_patch "Create New Post", to: Routes.post_posts_path(@socket, :new, @id) %></span>
+
+  <div class="card-container">
+      <div id="posts">
+          <%= for post <- @posts do %>
+          <div class="card">
+              <div class="container">
+                  <h4><b><%= post.name %></b></h4>
+                  <p><%= post.body %></p>
+              </div>
+              <span><%= live_redirect "Show", to: Routes.post_show_path(@socket, :show, post) %></span>
+              <span><%= live_patch "Edit", to: Routes.post_posts_path(@socket, :edit, post) %></span>
+              <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: post.id, data: [confirm: "Are you sure?"] %></span>
+          </div>
+          <% end %>
+      </div>
+  </div>
+

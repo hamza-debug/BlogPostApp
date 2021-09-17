@@ -1,0 +1,16 @@
+<h2>Login page</h2>
+<%= f = form_for @changeset, Routes.login_path(@socket, :login)%>
+
+<div class="form-group">
+    <%= label f, :email, class: "control-label"%>
+    <%= text_input f, :email, class: "form-control"%>
+    <%= error_tag f, :email%>
+</div>
+<div class="form-group">
+    <%= label f, :password, class: "control-label"%>
+    <%= text_input f, :password, class: "form-control"%>
+    <%= error_tag f, :password%>
+</div>
+
+<%= submit "Login", phx_disable_with: "login..." %>
+</form>

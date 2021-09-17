@@ -1,0 +1,18 @@
+
+
+<h1>Listing Posts</h1>
+
+<span><%= live_patch "Login for New Post", to: Routes.user_login_path(@socket, :login) %></span>
+
+<div class="card-container">
+    <div id="posts">
+        <%= for post <- @posts do %>
+        <div class="card" id="post-<%= post.id %>">
+            <div class="container">
+                <h4> <b><%= post.name %> </b> </h4>
+                <p><%= post.body%></p>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>
